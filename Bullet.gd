@@ -15,18 +15,16 @@ func _ready():
 
 func _physics_process(delta):
 	liniear_velcoity = Vector2(speed,0).rotated(self.rotation)
-	if not moving:
-		look_at(get_global_mouse_position())
+	if moving:
+		look_at(target)
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) and not mouse_button_pressed:
 		target = get_global_mouse_position()
-		look_at(get_global_mouse_position())
-		print(target_rot)
 		speed = 200
 		mouse_button_pressed = true
 		moving = true
 	elif not Input.is_mouse_button_pressed(BUTTON_LEFT) and mouse_button_pressed:
 		mouse_button_pressed = false
-	if get_distance(global_position,target) < 10:
+	if get_distance(global_position,target) < 20:
 		speed = 0
 		moving = false
 	liniear_velcoity.x = lerp(liniear_velcoity.x,speed,0.05)
